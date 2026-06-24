@@ -6,7 +6,7 @@
 
 [Microsoft SharePoint Term Store](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration) is a centralized taxonomy management service within Microsoft 365 that enables organizations to define, organize, and govern managed metadata terms across sites and applications for consistent content classification.
 
-The `ballerinax/microsoft.sharepoint.termstore` package offers APIs to connect and interact with the [Microsoft SharePoint Term Store API](https://learn.microsoft.com/en-us/graph/api/resources/termstore-store?view=graph-rest-1.0) endpoints, specifically based on [Microsoft Graph REST API v1.0](https://learn.microsoft.com/en-us/graph/api/resources/termstore-store?view=graph-rest-1.0).
+The `ballerinax/microsoft.sharepoint.termstore` package offers APIs to connect and interact with the [Microsoft SharePoint Term Store API](https://learn.microsoft.com/en-us/graph/api/resources/termstore-store?view=graph-rest-1.0) endpoints, specifically based on [Microsoft Graph REST API v1.0](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0).
 
 ## Setup guide
 

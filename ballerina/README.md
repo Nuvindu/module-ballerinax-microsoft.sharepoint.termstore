@@ -2,7 +2,7 @@
 
 [Microsoft SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration) is a collaborative platform that enables organizations to manage content, knowledge, and applications to empower teamwork, quickly find information, and seamlessly collaborate across the enterprise.
 
-The `ballerinax/microsoft.sharepoint.termstore` package offers APIs to connect and interact with the [Microsoft SharePoint Term Store API](https://learn.microsoft.com/en-us/graph/api/resources/termstore-store?view=graph-rest-1.0) endpoints, specifically based on [Microsoft Graph REST API v1.0](https://learn.microsoft.com/en-us/graph/api/resources/termstore-store?view=graph-rest-1.0).
+The `ballerinax/microsoft.sharepoint.termstore` package offers APIs to connect and interact with the [Microsoft SharePoint Term Store API](https://learn.microsoft.com/en-us/graph/api/resources/termstore-store?view=graph-rest-1.0) endpoints, specifically based on [Microsoft Graph REST API v1.0](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0).
 
 ## Setup guide
 
