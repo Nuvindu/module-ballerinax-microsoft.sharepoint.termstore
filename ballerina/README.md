@@ -6,29 +6,66 @@ The `ballerinax/microsoft.sharepoint.termstore` package offers APIs to connect a
 
 ## Setup guide
 
-To use the Microsoft SharePoint Term Store connector, you must have access to the Microsoft SharePoint API through a [Microsoft Azure developer account](https://portal.azure.com/) and obtain an OAuth 2.0 access token by registering an application in Azure Active Directory. If you do not have a Microsoft account, you can sign up for one [here](https://signup.microsoft.com/).
+To use the Microsoft SharePoint Term Store connector, you must have access to the Microsoft SharePoint API through a [Microsoft Azure developer account](https://portal.azure.com/) and obtain client credentials by registering an application in Microsoft Entra. If you do not have a Microsoft account, you can [sign up for a Microsoft account](https://account.microsoft.com/account).
 
-### Step 1: Create a Microsoft Account and Set Up SharePoint
+### Step 1: Create a Microsoft Account and Set Up SharePoint Access
 
 1. Navigate to the [Microsoft 365 website](https://www.microsoft.com/en-us/microsoft-365) and sign up for an account or log in if you already have one.
 
-2. Ensure you have a Microsoft 365 Business or Enterprise plan (such as Microsoft 365 Business Standard, Business Premium, E3, or E5), as access to SharePoint Term Store and its API capabilities is restricted to users on these plans.
+2. Ensure you have a Microsoft 365 Business Basic, Business Standard, Business Premium, or an Enterprise (E1, E3, or E5) plan, as access to the SharePoint Term Store API requires an active SharePoint Online subscription. The Term Store (Managed Metadata Service) is not available on personal or free-tier Microsoft accounts.
 
-### Step 2: Register an Application and Generate an Access Token
+### Step 2: Register an Application and Generate Credentials
 
-1. Log in to the [Azure Portal](https://portal.azure.com/) using your Microsoft account credentials.
+1. Log in to the [Microsoft Azure Portal](https://portal.azure.com/) using your Microsoft 365 account credentials.
 
-2. In the left-hand navigation menu, select **Azure Active Directory** (or search for it in the top search bar).
+2. In the left-hand navigation menu, select **Microsoft Entra ID** in the top search bar.
 
-3. Under **Manage**, select **App registrations**, then click **New registration**.
+3. In the left panel, navigate to **App registrations** and click **New registration**.
 
-4. Provide a name for your application, select the appropriate **Supported account types** (e.g., single tenant or multitenant), and click **Register**.
+   ![New application registration](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-microsoft.sharepoint.termstore/refs/heads/main/docs/resources/new-application-registration.png)
 
-5. Once the application is registered, navigate to **API permissions** under **Manage**. Click **Add a permission**, select **Microsoft Graph**, and add the required permissions for SharePoint Term Store (e.g., `TermStore.Read.All` or `TermStore.ReadWrite.All`). Click **Grant admin consent** to approve the permissions.
+4. Enter a name for your application, select the appropriate **Supported account types** (e.g., "Single tenant only"), and click **Register**.
 
-6. To generate a client secret, navigate to **Certificates & secrets** under **Manage**, click **New client secret**, provide a description and expiry period, and click **Add**. Copy the generated secret value immediately.
+   ![Application registration details](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-microsoft.sharepoint.termstore/refs/heads/main/docs/resources/application-registration-details.png)
 
-7. Note your **Application (client) ID** and **Directory (tenant) ID** from the **Overview** page, as these are required along with the client secret to obtain an OAuth 2.0 access token for authenticating API requests.
+5. Once the application is registered, note down the **Application (client) ID** and **Directory (tenant) ID** from the Overview page.
+
+   ![Client ID and Tenant ID](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-microsoft.sharepoint.termstore/refs/heads/main/docs/resources/client-id-and-tenant-id.png)
+
+6. Navigate to **Certificates & secrets** in the left panel, click **New client secret**, provide a description and expiry period, then click **Add**. Copy the generated **client secret value** immediately.
+
+   ![Create client secret](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-microsoft.sharepoint.termstore/refs/heads/main/docs/resources/create-client-secret.png)
+
+7. Navigate to **API permissions** in the left panel and click **Add a permission**.
+
+   ![Add API permission](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-microsoft.sharepoint.termstore/refs/heads/main/docs/resources/add-api-permission.png)
+
+8. Select **Microsoft Graph** from the available API options.
+
+   ![Microsoft Graph API permission](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-microsoft.sharepoint.termstore/refs/heads/main/docs/resources/microsoft-graph-api-permission.png)
+
+9. Select **Application permissions**, then search for and add the following permissions depending on your use case, then click **Add permissions**.
+
+   | Permission | Operations covered |
+   | --- | --- |
+   | `TermStore.Read.All` | Read term store data including groups, term sets, and terms |
+   | `TermStore.ReadWrite.All` | Read and write term store data including creating, updating, and deleting groups, term sets, and terms |
+
+   > **Tip:** Grant only the permissions your application actually requires. For read-only use cases, `TermStore.Read.All` is sufficient.
+
+   ![API term store permissions](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-microsoft.sharepoint.termstore/refs/heads/main/docs/resources/api-site-permissions.png)
+
+10. Click **Grant admin consent** to approve the permissions for your organization.
+
+    ![Grant admin consent](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-microsoft.sharepoint.termstore/refs/heads/main/docs/resources/grant-admin-consent.png)
+
+11. Construct the `tokenUrl` using the **Directory (tenant) ID** obtained in step 5:
+
+```text
+https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token
+```
+
+This is the OAuth 2.0 token endpoint the connector uses to exchange your `clientId` and `clientSecret` for an access token with the `https://graph.microsoft.com/.default` scope.
 
 > **Tip:** You must copy and store the client secret value somewhere safe. It won't be visible again in the Azure Portal after you navigate away from the page, for security reasons.
 
