@@ -15,6 +15,7 @@
 // under the License.
 
 import ballerina/io;
+import ballerina/time;
 import ballerinax/microsoft.sharepoint.termstore;
 
 configurable string clientId = ?;
@@ -24,7 +25,7 @@ configurable string siteId = ?;
 
 public function main() returns error? {
     termstore:ConnectionConfig config = {
-        auth: <termstore:OAuth2ClientCredentialsGrantConfig>{
+        auth: {
             clientId: clientId,
             clientSecret: clientSecret,
             tokenUrl: string `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
@@ -63,10 +64,13 @@ public function main() returns error? {
 
     io:println("");
 
-    io:println("Step 2: Creating Term Store Group 'Product Catalog'...");
+    time:Utc currentTime = time:utcNow();
+    string groupName = string `Product Catalog ${currentTime[0]}`;
+
+    io:println("Step 2: Creating Term Store Group '", groupName, "'...");
 
     termstore:MicrosoftGraphTermStoreGroup newGroupPayload = {
-        displayName: "Product Catalog",
+        displayName: groupName,
         description: "Taxonomy group for organizing product catalog metadata across the organization",
         scope: "global"
     };
@@ -97,18 +101,6 @@ public function main() returns error? {
             {
                 languageTag: "en-US",
                 name: "Product Categories"
-            },
-            {
-                languageTag: "fr-FR",
-                name: "Catégories de produits"
-            },
-            {
-                languageTag: "de-DE",
-                name: "Produktkategorien"
-            },
-            {
-                languageTag: "es-ES",
-                name: "Categorías de productos"
             }
         ],
         "displayName": "Product Categories",

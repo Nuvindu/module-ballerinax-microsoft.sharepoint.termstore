@@ -28,7 +28,7 @@ configurable string billTermId = ?;
 
 public function main() returns error? {
     termstore:ConnectionConfig config = {
-        auth: <termstore:OAuth2ClientCredentialsGrantConfig>{
+        auth: {
             tokenUrl: string `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
             clientId: clientId,
             clientSecret: clientSecret,
@@ -99,10 +99,10 @@ public function main() returns error? {
 
     termstore:MicrosoftGraphTermStoreRelation relationPayload = {
         relationship: "pin",
-        set: <termstore:MicrosoftGraphTermStoreSet>{
+        set: {
             id: procurementSetId
         },
-        fromTerm: <termstore:MicrosoftGraphTermStoreTerm>{
+        fromTerm: {
             id: billTermId
         }
     };

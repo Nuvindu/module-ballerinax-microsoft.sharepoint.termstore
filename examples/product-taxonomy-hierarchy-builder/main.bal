@@ -26,7 +26,7 @@ configurable string productCatalogSetId = ?;
 
 public function main() returns error? {
     termstore:ConnectionConfig config = {
-        auth: <termstore:OAuth2ClientCredentialsGrantConfig>{
+        auth: {
             clientId: clientId,
             clientSecret: clientSecret,
             tokenUrl: "https://login.microsoftonline.com/" + tenantId + "/oauth2/v2.0/token",
