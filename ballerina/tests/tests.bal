@@ -101,7 +101,7 @@ isolated function testUpdateGroup() returns error? {
     test:assertEquals(response, (), msg = "Group update should return no error (204 No Content)");
 }
 
-@test:Config {dependsOn: [testUpdateGroup], groups: ["live_test", "mock_test"]}
+@test:Config {dependsOn: [testUpdateGroup, testDeleteGroupSet], groups: ["live_test", "mock_test"]}
 isolated function testDeleteGroup() returns error? {
     string groupId;
     lock {
@@ -165,7 +165,7 @@ isolated function testUpdateGroupSet() returns error? {
     test:assertEquals(response, (), msg = "Term set update should return no error (204 No Content)");
 }
 
-@test:Config {dependsOn: [testUpdateGroupSet], groups: ["live_test", "mock_test"]}
+@test:Config {dependsOn: [testUpdateGroupSet, testDeleteGroupSetChild], groups: ["live_test", "mock_test"]}
 isolated function testDeleteGroupSet() returns error? {
     string groupId;
     string setId;
