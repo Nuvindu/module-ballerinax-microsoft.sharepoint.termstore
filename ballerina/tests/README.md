@@ -25,7 +25,7 @@ No credentials are required. Run directly from the `ballerina/` directory:
 bal test
 ```
 
-This starts the mock HTTP service on port 9090 and runs all `mock_test` group tests.
+This starts the mock HTTP service on port 9090 and runs all tests. Since `IS_LIVE_SERVER` defaults to `false`, the client connects to the mock service; tests tagged with `live_test` will run against it as well but no real credentials or network access are needed.
 
 ### Live Tests
 

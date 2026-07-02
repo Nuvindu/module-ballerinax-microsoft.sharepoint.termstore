@@ -104,7 +104,7 @@ public function main() returns error? {
         ]
     };
 
-    termstore:MicrosoftGraphTermStoreTerm createdSmartphonesTerm = check termstoreClient->createGroupSetChildChild(siteId, groupId, productCatalogSetId, electronicsTermId, smartphonesTerm);
+    termstore:MicrosoftGraphTermStoreTerm createdSmartphonesTerm = check termstoreClient->createSetTermChild(siteId, productCatalogSetId, electronicsTermId, smartphonesTerm);
 
     string smartphonesTermId = createdSmartphonesTerm?.id ?: "";
     io:println("Successfully created 'Smartphones' sub-term under 'Electronics'.");
@@ -121,5 +121,5 @@ public function main() returns error? {
     io:println("  └── Electronics (ID: " + electronicsTermId + ")");
     io:println("        └── Smartphones (ID: " + smartphonesTermId + ")");
     io:println("");
-    io:println("Two-level product hierarchy successfully built in SharePoint Managed Metadata Service.");
+    io:println("Product hierarchy successfully built in SharePoint Managed Metadata Service.");
 }

@@ -103,30 +103,17 @@ public function main() returns error? {
                 name: "Product Categories"
             }
         ],
-        "displayName": "Product Categories",
-        "description": "Hierarchical classification of product categories supporting global content strategy",
-        "isOpen": true,
-        "isAvailableForTagging": true
+        description: "Hierarchical classification of product categories supporting global content strategy"
     };
 
     termstore:MicrosoftGraphTermStoreSet createdTermSet = check termstoreClient->createGroupSet(siteId, groupId, newTermSetPayload);
 
-    anydata createdTermSetDisplayNameVal = createdTermSet["displayName"];
-    string createdTermSetDisplayName = createdTermSetDisplayNameVal is string ? createdTermSetDisplayNameVal : "N/A";
     string createdTermSetId = createdTermSet.id ?: "N/A";
-    anydata createdTermSetDescriptionVal = createdTermSet["description"];
-    string createdTermSetDescription = createdTermSetDescriptionVal is string ? createdTermSetDescriptionVal : "N/A";
-    anydata createdTermSetIsAvailableForTaggingVal = createdTermSet["isAvailableForTagging"];
-    boolean createdTermSetIsAvailableForTagging = createdTermSetIsAvailableForTaggingVal is boolean ? createdTermSetIsAvailableForTaggingVal : false;
-    anydata createdTermSetIsOpenVal = createdTermSet["isOpen"];
-    boolean createdTermSetIsOpen = createdTermSetIsOpenVal is boolean ? createdTermSetIsOpenVal : false;
+    string createdTermSetDescription = createdTermSet.description ?: "N/A";
 
     io:println("Successfully created Term Set:");
-    io:println("  Name: ", createdTermSetDisplayName);
     io:println("  ID: ", createdTermSetId);
     io:println("  Description: ", createdTermSetDescription);
-    io:println("  Open for Tagging: ", createdTermSetIsAvailableForTagging);
-    io:println("  Open for Term Creation: ", createdTermSetIsOpen);
 
     termstore:MicrosoftGraphTermStoreLocalizedName[]? localizedNames = createdTermSet.localizedNames;
     if localizedNames is termstore:MicrosoftGraphTermStoreLocalizedName[] {

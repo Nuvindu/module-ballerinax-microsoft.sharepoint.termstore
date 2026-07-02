@@ -37,7 +37,8 @@ isolated function initClient() returns Client|error {
                 auth: <OAuth2ClientCredentialsGrantConfig>{
                     clientId,
                     clientSecret,
-                    tokenUrl
+                    tokenUrl,
+                    scopes: ["https://graph.microsoft.com/.default"]
                 }
             },
             serviceUrl

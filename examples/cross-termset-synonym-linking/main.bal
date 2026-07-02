@@ -95,7 +95,7 @@ public function main() returns error? {
         }
     }
 
-    io:println("\n=== Step 4: Creating a 'pin' synonym relation between 'Invoice' and 'Bill' ===");
+    io:println("\n=== Step 4: Creating a 'pin' relation between 'Invoice' and 'Bill' ===");
 
     termstore:MicrosoftGraphTermStoreRelation relationPayload = {
         relationship: "pin",
@@ -110,7 +110,7 @@ public function main() returns error? {
     termstore:MicrosoftGraphTermStoreRelation createdRelation =
         check termstoreClient->createSetTermRelation(siteId, financeSetId, invoiceTermId, relationPayload);
 
-    io:println("Successfully created synonym relation!");
+    io:println("Successfully created pin relation!");
     string relationId = createdRelation?.id ?: "unknown";
     io:println("  Relation ID: ", relationId);
 
@@ -119,8 +119,9 @@ public function main() returns error? {
         io:println("  Relationship type: ", rawRelationship);
     }
 
-    io:println("\n=== Synonym Relationship Builder Complete ===");
-    io:println("The 'Invoice' term in the Finance term set is now linked as a synonym");
-    io:println("of the 'Bill' term in the Procurement term set.");
-    io:println("Search queries for either term will now surface documents tagged with both terms.");
+    io:println("\n=== Cross-Termset Pin/Reuse Relationship Builder Complete ===");
+    io:println("The 'Invoice' term in the Finance term set is now pinned to the");
+    io:println("'Bill' term in the Procurement term set via a Graph v1.0 'pin' relation.");
+    io:println("Note: Graph v1.0 termStore relations are 'pin' or 'reuse' only.");
+    io:println("True synonyms are modeled as additional non-default labels on a term.");
 }

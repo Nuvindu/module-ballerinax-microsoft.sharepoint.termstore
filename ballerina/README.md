@@ -4,6 +4,8 @@
 
 The `ballerinax/microsoft.sharepoint.termstore` package offers APIs to connect and interact with the [Microsoft SharePoint Term Store API](https://learn.microsoft.com/en-us/graph/api/resources/termstore-store?view=graph-rest-1.0) endpoints, specifically based on [Microsoft Graph REST API v1.0](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0).
 
+> **Note:** This connector manages the taxonomy (groups, term sets, terms) only. Every operation requires a `siteId`, which you can retrieve using the sibling [`ballerinax/microsoft.sharepoint.sites`](https://central.ballerina.io/ballerinax/microsoft.sharepoint.sites) connector (`getSite`/`listSite`). To apply managed-metadata terms to list items (e.g., set a managed-metadata column value), use the [`ballerinax/microsoft.sharepoint.lists`](https://central.ballerina.io/ballerinax/microsoft.sharepoint.lists) connector (`updateItemFields`).
+
 ## Setup guide
 
 To use the Microsoft SharePoint Term Store connector, you must have access to the Microsoft SharePoint API through a [Microsoft Azure developer account](https://portal.azure.com/) and obtain client credentials by registering an application in Microsoft Entra. If you do not have a Microsoft account, you can [sign up for a Microsoft account](https://account.microsoft.com/account).
@@ -61,11 +63,11 @@ To use the Microsoft SharePoint Term Store connector, you must have access to th
 
 11. Construct the `tokenUrl` using the **Directory (tenant) ID** obtained in step 5:
 
-```text
-https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token
-```
+    ```text
+    https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token
+    ```
 
-This is the OAuth 2.0 token endpoint the connector uses to exchange your `clientId` and `clientSecret` for an access token with the `https://graph.microsoft.com/.default` scope.
+    This is the OAuth 2.0 token endpoint the connector uses to exchange your `clientId` and `clientSecret` for an access token with the `https://graph.microsoft.com/.default` scope.
 
 > **Tip:** You must copy and store the client secret value somewhere safe. It won't be visible again in the Azure Portal after you navigate away from the page, for security reasons.
 
@@ -83,28 +85,28 @@ import ballerinax/microsoft.sharepoint.termstore;
 
 1. Create a `Config.toml` file and configure the obtained credentials:
 
-```toml
-clientId = "<Your_Client_Id>"
-clientSecret = "<Your_Client_Secret>"
-tenantId = "<Your_Tenant_Id>"
-```
+    ```toml
+    clientId = "<Your_Client_Id>"
+    clientSecret = "<Your_Client_Secret>"
+    tenantId = "<Your_Tenant_Id>"
+    ```
 
 2. Create a `termstore:ConnectionConfig` and initialize the client:
 
-```ballerina
-configurable string clientId = ?;
-configurable string clientSecret = ?;
-configurable string tenantId = ?;
+    ```ballerina
+    configurable string clientId = ?;
+    configurable string clientSecret = ?;
+    configurable string tenantId = ?;
 
-final termstore:Client termstoreClient = check new ({
-    auth: <termstore:OAuth2ClientCredentialsGrantConfig>{
-        clientId,
-        clientSecret,
-        tokenUrl: string `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
-        scopes: ["https://graph.microsoft.com/.default"]
-    }
-});
-```
+    final termstore:Client termstoreClient = check new ({
+        auth: <termstore:OAuth2ClientCredentialsGrantConfig>{
+            clientId,
+            clientSecret,
+            tokenUrl: string `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
+            scopes: ["https://graph.microsoft.com/.default"]
+        }
+    });
+    ```
 
 ### Step 3: Invoke the connector operation
 

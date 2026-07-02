@@ -1,6 +1,6 @@
-# Cross Termset Synonym Linking
+# Cross Termset Pin/Reuse Term Linking
 
-This example demonstrates how to link terms across different term sets in a Microsoft SharePoint term store by creating a "pin" synonym relation between an "Invoice" term in a Finance term set and a "Bill" term in a Procurement term set, enabling unified search results across both terms.
+This example demonstrates how to link terms across different term sets in a Microsoft SharePoint term store by creating a `pin` relation between an "Invoice" term in a Finance term set and a "Bill" term in a Procurement term set. Per Graph v1.0, termStore relations are `pin` or `reuse` only — true synonyms are modeled as additional non-default labels on a term.
 
 ## Prerequisites
 

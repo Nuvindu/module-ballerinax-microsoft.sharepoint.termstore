@@ -8,6 +8,8 @@
 
 The `ballerinax/microsoft.sharepoint.termstore` package offers APIs to connect and interact with the [Microsoft SharePoint Term Store API](https://learn.microsoft.com/en-us/graph/api/resources/termstore-store?view=graph-rest-1.0) endpoints, specifically based on [Microsoft Graph REST API v1.0](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0).
 
+> **Note:** This connector manages the taxonomy (groups, term sets, terms) only. Every operation requires a `siteId`, which you can retrieve using the sibling [`ballerinax/microsoft.sharepoint.sites`](https://central.ballerina.io/ballerinax/microsoft.sharepoint.sites) connector (`getSite`/`listSite`). To apply managed-metadata terms to list items (e.g., set a managed-metadata column value), use the [`ballerinax/microsoft.sharepoint.lists`](https://central.ballerina.io/ballerinax/microsoft.sharepoint.lists) connector (`updateItemFields`).
+
 ## Setup guide
 
 To use the Microsoft SharePoint Term Store connector, you must have access to the Microsoft SharePoint API through a [Microsoft Azure developer account](https://portal.azure.com/) and obtain client credentials by registering an application in Microsoft Entra. If you do not have a Microsoft account, you can [sign up for a Microsoft account](https://account.microsoft.com/account).
@@ -101,12 +103,12 @@ configurable string clientSecret = ?;
 configurable string tenantId = ?;
 
 final termstore:Client termstoreClient = check new ({
-    auth: <termstore:OAuth2ClientCredentialsGrantConfig>{
-        clientId,
-        clientSecret,
-        tokenUrl: string `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
-        scopes: ["https://graph.microsoft.com/.default"]
-    }
+   auth: <termstore:OAuth2ClientCredentialsGrantConfig>{
+      clientId,
+      clientSecret,
+      tokenUrl: string `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
+      scopes: ["https://graph.microsoft.com/.default"]
+   }
 });
 ```
 
