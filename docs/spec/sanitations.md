@@ -6,7 +6,7 @@ _Edition_: Swan Lake
 # Sanitation for OpenAPI specification
 
 This document records the sanitation done on top of the official OpenAPI specification from Microsoft SharePoint Termstore. 
-The OpenAPI specification is obtained from (TODO: Add source link).
+The OpenAPI specification is obtained from [Microsoft Graph REST API v1.0 OpenAPI description](https://github.com/microsoftgraph/msgraph-metadata/tree/master/openapi/v1.0).
 These changes are done in order to improve the overall usability, and as workarounds for some known language limitations.
 
 1. **Updated operation IDs with suitable names**: The operation IDs in the original specification were auto-generated and not descriptive. They have been replaced with meaningful, readable names that accurately reflect the operation's purpose.
