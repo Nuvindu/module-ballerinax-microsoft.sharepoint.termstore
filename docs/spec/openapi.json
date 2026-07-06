@@ -656,8 +656,15 @@
                     "required": true
                 },
                 "responses": {
-                    "204": {
-                        "description": "Success"
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MicrosoftGraphTermStoreGroup"
+                                }
+                            }
+                        }
                     },
                     "default": {
                         "description": "error",
@@ -671,7 +678,7 @@
                     }
                 },
                 "x-ms-docs-operation-type": "operation",
-                "description": "Returns no content upon successfully updating the specified term store group within the site."
+                "description": "Returns the updated group entity upon successfully updating the specified term store group within the site."
             },
             "x-ms-docs-grouped-path": [
                 "/sites/{site-id}/termStores/{store-id}/groups/{group-id}"
