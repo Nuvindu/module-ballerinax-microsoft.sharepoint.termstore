@@ -124,56 +124,6 @@
                 },
                 "x-ms-docs-operation-type": "operation"
             },
-            "delete": {
-                "tags": [
-                    "sites.store"
-                ],
-                "summary": "Delete navigation property term store for sites",
-                "operationId": "deleteTermStore",
-                "parameters": [
-                    {
-                        "name": "siteId",
-                        "in": "path",
-                        "description": "The unique identifier of site",
-                        "required": true,
-                        "style": "simple",
-                        "explode": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "x-ms-docs-key-type": "site"
-                    },
-                    {
-                        "name": "If-Match",
-                        "in": "header",
-                        "description": "ETag",
-                        "required": false,
-                        "style": "simple",
-                        "explode": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "x-ballerina-name": "ifMatch"
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Success"
-                    },
-                    "default": {
-                        "description": "error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MicrosoftGraphODataErrorsODataError"
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-ms-docs-operation-type": "operation",
-                "description": "Returns no content upon successfully removing the term store navigation property from the specified site."
-            },
             "patch": {
                 "tags": [
                     "sites.store"
