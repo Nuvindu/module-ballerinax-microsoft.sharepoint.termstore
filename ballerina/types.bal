@@ -4465,13 +4465,6 @@ public type DeleteTermStoreSetParentGroupSetHeaders record {
     string ifMatch?;
 };
 
-# Represents the Headers record for the operation: deleteTermStore
-public type DeleteTermStoreHeaders record {
-    # ETag
-    @http:Header {name: "If-Match"}
-    string ifMatch?;
-};
-
 # Represents the Queries record for the operation: getSetChildCount
 public type GetSetChildCountQueries record {
     # Filter items by property values

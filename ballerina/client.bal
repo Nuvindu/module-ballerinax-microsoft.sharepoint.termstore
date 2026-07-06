@@ -46,17 +46,6 @@ public isolated client class Client {
         return self.clientEp->get(resourcePath, headers);
     }
 
-    # Delete navigation property term store for sites
-    #
-    # + siteId - The unique identifier of site
-    # + headers - Headers to be sent with the request 
-    # + return - Success 
-    remote isolated function deleteTermStore(string siteId, DeleteTermStoreHeaders headers = {}) returns error? {
-        string resourcePath = string `/sites/${getEncodedUri(siteId)}/termStore`;
-        map<string|string[]> httpHeaders = http:getHeaderMap(headers);
-        return self.clientEp->delete(resourcePath, headers = httpHeaders);
-    }
-
     # Update term store
     #
     # + siteId - The unique identifier of site
@@ -131,7 +120,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + payload - New navigation property values 
     # + return - Success 
-    remote isolated function updateGroup(string siteId, string groupId, MicrosoftGraphTermStoreGroup payload, map<string|string[]> headers = {}) returns error? {
+    remote isolated function updateGroup(string siteId, string groupId, MicrosoftGraphTermStoreGroup payload, map<string|string[]> headers = {}) returns MicrosoftGraphTermStoreGroup|error {
         string resourcePath = string `/sites/${getEncodedUri(siteId)}/termStore/groups/${getEncodedUri(groupId)}`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
