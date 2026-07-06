@@ -79,11 +79,17 @@ service / on new http:Listener(9090) {
 
     resource function patch sites/[string siteId]/termStore/groups/[string groupId](
             @http:Payload MicrosoftGraphTermStoreGroup payload)
-            returns http:NoContent|http:NotFound {
+            returns MicrosoftGraphTermStoreGroup|http:NotFound {
         if groupId != mockGroupId {
             return http:NOT_FOUND;
         }
-        return http:NO_CONTENT;
+        return {
+            id: mockGroupId,
+            displayName: payload?.displayName ?: "Test Taxonomy Group",
+            description: payload?.description,
+            scope: payload?.scope,
+            createdDateTime: mockCreatedDateTime
+        };
     }
 
     resource function delete sites/[string siteId]/termStore/groups/[string groupId]()

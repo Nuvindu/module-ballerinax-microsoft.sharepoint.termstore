@@ -98,8 +98,8 @@ isolated function testUpdateGroup() returns error? {
     MicrosoftGraphTermStoreGroup payload = {
         description: "Updated description for the test taxonomy group"
     };
-    error? response = termstoreClient->updateGroup(siteId, groupId, payload);
-    test:assertEquals(response, (), msg = "Group update should return no error (204 No Content)");
+    MicrosoftGraphTermStoreGroup|error response = termstoreClient->updateGroup(siteId, groupId, payload);
+    test:assertFalse(response is error, msg = "Group update should not return an error");
 }
 
 @test:Config {dependsOn: [testUpdateGroup, testDeleteGroupSet], groups: ["live_test", "mock_test"]}
